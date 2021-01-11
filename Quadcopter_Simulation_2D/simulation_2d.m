@@ -93,9 +93,6 @@ for iter = 1:max_iter
   ylim(y_lim); zlim(z_lim);
   set(h_title, 'String', sprintf('iteration: %d, time: %4.2f', iter, time + cstep))
   time = time + cstep; % Update simulation time
-  if video
-    writeVideo(video_writer, getframe(h_fig));
-  end
     subplot(3,3,3)
     plot(ttraj(1:iter*nstep), xtraj(1:iter*nstep,1));
     xlabel('t [s]'); ylabel('y [m]');
