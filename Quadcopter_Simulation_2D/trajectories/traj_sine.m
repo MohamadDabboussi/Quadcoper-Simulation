@@ -1,6 +1,6 @@
 function desired_state = traj_sine(t, ~)
 
-initial_pos = [0; 0];
+initial_pos = [0; 0.5];
 v_max_y = 2;
 a_max_y = 2;
 
@@ -30,11 +30,11 @@ end
 t_max = 3*v_max_y/a_max_y;
 omega = 4*pi/t_max;
 if t < t_max
-  pos_z = 0.25*(1 - cos(omega*t));
+  pos_z = 0.5*(1 - cos(omega*t));
   vel_z = 0.25*omega*sin(omega*t);
   acc_z = 0.25*(omega.^2)*cos(omega*t);
 else
-  pos_z = 0.25*(1 - cos(omega*t_max));
+  pos_z = 0.5*(1 - cos(omega*t_max));
   vel_z = 0;
   acc_z = 0;
 end
