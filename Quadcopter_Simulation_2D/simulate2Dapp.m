@@ -1,4 +1,4 @@
-function [t_out, s_out] = simulation_2d(controlhandle, trajhandle)
+function [t_out, s_out] = simulation_2dapp(controlhandle, trajhandle,MainPlot,splot1,splot2,splot3)
 
 params = sys_params;
 
@@ -7,18 +7,18 @@ real_time = true;
 
 %% **************************** FIGURES *****************************
 disp('Initializing figures...')
-h_fig = figure;
-sz = [1000 600]; % figure size
-screensize = get(0,'ScreenSize');
-xpos = ceil((screensize(3)-sz(1))/2); % center the figure on the screen horizontally
-ypos = ceil((screensize(4)-sz(2))/2); % center the figure on the screen vertically
-set(h_fig, 'Position', [xpos ypos sz])
+% h_fig = figure;
+% sz = [1000 600]; % figure size
+% screensize = get(0,'ScreenSize');
+% xpos = ceil((screensize(3)-sz(1))/2); % center the figure on the screen horizontally
+% ypos = ceil((screensize(4)-sz(2))/2); % center the figure on the screen vertically
+% set(h_fig, 'Position', [xpos ypos sz])
 
-h_3d = subplot(3,3,[1,2,4,5,7,8]);
-axis equal
-grid on
-view(90,0);
-ylabel('y [m]'); zlabel('z [m]');
+% h_3d = subplot(3,3,[1,2,4,5,7,8]);
+% axis equal
+% grid on
+% view(90,0);
+% ylabel('y [m]'); zlabel('z [m]');
 
 quadcolors = lines(1);
 
@@ -69,13 +69,13 @@ for iter = 1:max_iter
   tic;
   % Initialize quad plot
   if iter == 1
-    subplot(3,3,[1,2,4,5,7,8]);
+    MainPlot
     quad_state = simStateToQuadState(x0);
-    QP = QuadPlot(1, quad_state, params.arm_length, 0.05, quadcolors(1,:), max_iter, h_3d);
-    ylim(y_lim); zlim(z_lim);
+    QP = QuadPlot(1, quad_state, params.arm_length, 0.05, quadcolors(1,:), max_iter, MainPlot);
+    %MainPlot.YLim(y_lim); MainPlot.ZLim(z_lim);
     quad_state = simStateToQuadState(x);
     QP.UpdateQuadPlot(quad_state, time);
-    h_title = title(h_3d, sprintf('iteration: %d, time: %4.2f', iter, time));
+    h_title = title(MainPlot, sprintf('iteration: %d, time: %4.2f', iter, time));
   end
 
   % Run simulation
@@ -89,25 +89,23 @@ for iter = 1:max_iter
   % Update quad plot
   quad_state = simStateToQuadState(x);
   QP.UpdateQuadPlot(quad_state, time + cstep);
-  subplot(3,3,[1,2,4,5,7,8]);
-  ylim(y_lim); zlim(z_lim);
+  MainPlot
+  MainPlot.YLim(y_lim); MainPlot.ZLim(z_lim);
   set(h_title, 'String', sprintf('iteration: %d, time: %4.2f', iter, time + cstep))
   time = time + cstep; % Update simulation time
-  if video
-    writeVideo(video_writer, getframe(h_fig));
-  end
-    subplot(3,3,3)
-    plot(ttraj(1:iter*nstep), xtraj(1:iter*nstep,1));
-    xlabel('t [s]'); ylabel('y [m]');
+  
+    splot1
+    plot(splot1,ttraj(1:iter*nstep), xtraj(1:iter*nstep,1));
+    %splot1.XLabel('t [s]'); splot1.YLabel('y [m]');
     grid on;
-    subplot(3,3,6)
+    splot2
     plot(ttraj(1:iter*nstep), xtraj(1:iter*nstep,2));
-    xlabel('t [s]'); ylabel('z [m]');
+    %splot2.XLabel('t [s]'); splot2.YLabel('z [m]');
     grid on;
-    subplot(3,3,9)
+    splot3
     plot(ttraj(1:iter*nstep), 180/pi*xtraj(1:iter*nstep,3));
     grid on;
-    xlabel('t [s]'); ylabel('\phi [deg]');
+    %splot3.XLabel('t [s]'); splot3.YLabel('\phi [deg]');
 
   t = toc;
   % Check to make sure ode45 is not timing out
