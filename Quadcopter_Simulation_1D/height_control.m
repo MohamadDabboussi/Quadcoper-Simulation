@@ -80,10 +80,10 @@ for iter = 1:max_iter
   end
 
   % Run simulation
-  [xsave,tsave]=wsysRK4V(@(t,s) sys_eom(t, s, controlhandle, trajhandle, params,kv,kp),x,time,time+cstep,100);
+  %[xsave,tsave]=wsysRK4V(@(t,s) sys_eom(t, s, controlhandle, trajhandle, params,kv,kp),x,time,time+cstep,100);
   %tsave
   %xsave
-  %[tsave, xsave] = ode45(@(t,s) sys_eom(t, s, controlhandle, trajhandle, params,kv,kp), timeint, x);
+  [tsave, xsave] = ode45(@(t,s) sys_eom(t, s, controlhandle, trajhandle, params,kv,kp), timeint, x);
   tsave
   xsave
   
