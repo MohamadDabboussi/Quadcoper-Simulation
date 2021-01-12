@@ -55,8 +55,8 @@ classdef QuadPlot < handle
             end
             hold(h_3d,'on')
             Q.h_3d = h_3d;
-            Q.h_pos_hist = plot3(Q.h_3d, Q.state(1), Q.state(2), Q.state(3), 'r.');
-            Q.h_pos_des_hist = plot3(Q.h_3d, Q.des_state(1), Q.des_state(2), Q.des_state(3), 'b.');
+            Q.h_pos_hist = plot3(Q.h_3d, Q.state(1), Q.state(2), Q.state(3), 'r*');
+            Q.h_pos_des_hist = plot3(Q.h_3d, Q.des_state(1), Q.des_state(2), Q.des_state(3), 'b*');
             
             Q.h_m13 = plot3(Q.h_3d, ...
                 Q.motor(1,[1 3]), ...
