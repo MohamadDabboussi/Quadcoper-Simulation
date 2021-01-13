@@ -1,21 +1,11 @@
 function [t_out, z_out] = height_control(trajhandle, controlhandle)
 
 addpath('utils');
-
-video = false;
-video_filename = 'height_control.avi';
-
 params = sys_params;
-
-% real-time
 real_time = true;
 
 %% **************************** FIGURES *****************************
 disp('Initializing figures...')
-if video
-  video_writer = VideoWriter(video_filename, 'Uncompressed AVI');
-  open(video_writer);
-end
 h_fig = figure;
 sz = [1000 600]; % figure size
 screensize = get(0,'ScreenSize');
@@ -84,8 +74,6 @@ for iter = 1:max_iter
   %tsave
   %xsave
   [tsave, xsave] = ode45(@(t,s) sys_eom(t, s, controlhandle, trajhandle, params,kv,kp), timeint, x);
-  tsave
-  xsave
   
   x = xsave(end, :)';
 
@@ -101,17 +89,7 @@ for iter = 1:max_iter
   time = time + cstep; % Update simulation time
 
   set(plot_2d, 'XData', ttraj(1:iter*nstep), 'YData', xtraj(1:iter*nstep,1));
-  if video
-    writeVideo(video_writer, getframe(h_fig));
-  end
-
   t = toc;
-  % Check to make sure ode45 is not timing out
-  if(t > cstep*50)
-    err = 'Ode solver took too long for a step. Maybe the controller is unstable.';
-    disp(err);
-    break;
-  end
 
   % Pause to make real-time
   if real_time && (t < cstep)
@@ -127,9 +105,6 @@ else
 end
 
 disp('Simulation done');
-if video
-  close(video_writer);
-end
 
 if ~isempty(err)
   disp(['Error: ', err]);

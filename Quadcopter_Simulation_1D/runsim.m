@@ -12,9 +12,3 @@ controlhandle = @controller;
 
 % Run simulation with given trajectory generator and controller
 [t, z] = height_control(trajhandle, controlhandle);
-
-% % Sample code to get more info on the response
- sim_info = lsiminfo(z, t, z_des);
-%  disp(['Settling time [s]: ', num2str(sim_info.SettlingTime)]);
-%  disp(['Overshoot [%]: ', num2str(max(0,(sim_info.Max-z_des)*100))]);
-stepinfo(z,t)

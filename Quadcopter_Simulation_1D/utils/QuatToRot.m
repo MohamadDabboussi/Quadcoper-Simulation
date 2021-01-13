@@ -1,7 +1,5 @@
 function R = QuatToRot(q)
 %QuatToRot Converts a Quaternion to Rotation matrix
-%   written by Daniel Mellinger
-
 % normalize q
 q = q./sqrt(sum(q.^2));
 

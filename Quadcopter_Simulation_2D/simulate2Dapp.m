@@ -7,21 +7,7 @@ real_time = true;
 
 %% **************************** FIGURES *****************************
 disp('Initializing figures...')
-% h_fig = figure;
-% sz = [1000 600]; % figure size
-% screensize = get(0,'ScreenSize');
-% xpos = ceil((screensize(3)-sz(1))/2); % center the figure on the screen horizontally
-% ypos = ceil((screensize(4)-sz(2))/2); % center the figure on the screen vertically
-% set(h_fig, 'Position', [xpos ypos sz])
-
-% h_3d = subplot(3,3,[1,2,4,5,7,8]);
-% axis equal
-% grid on
-% view(90,0);
-% ylabel('y [m]'); zlabel('z [m]');
-
 quadcolors = lines(1);
-
 set(gcf,'Renderer','OpenGL')
 
 %% *********************** INITIAL CONDITIONS ***********************
