@@ -1,4 +1,4 @@
-function sdot = quadEOM(t, s, qn, controlhandle, trajhandle, params,Data)
+function sdot = quadEOM(t, s, qn, controlhandle, trajhandle, params,Data,speed,opt)
 % QUADEOM Wrapper function for solving quadrotor equation of motion
 % 	quadEOM takes in time, state vector, controller, trajectory generator
 % 	and parameters and output the derivative of the state vector, the
@@ -25,12 +25,11 @@ qd{qn} = stateToQd(s);
 desired_state = trajhandle(t, qn);
 
 % The desired_state is set in the trajectory generator
-
-qd{qn}.pos_des      = qd{qn}.pos;
-qd{qn}.vel_des      = Data';
+qd{qn}.pos_des      = qd{qn}.pos+Data;
+qd{qn}.vel_des      = desired_state.vel;
 qd{qn}.acc_des      = desired_state.acc;
-qd{qn}.yaw_des      = 0;
-qd{qn}.yawdot_des   = 0;
+qd{qn}.yaw_des      = desired_state.yaw;
+qd{qn}.yawdot_des   = desired_state.yawdot;
 
 % get control outputs
 [F, M, trpy, drpy] = controlhandle(qd, t, qn, params);

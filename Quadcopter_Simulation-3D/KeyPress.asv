@@ -3,6 +3,9 @@ function KeyPress(~,key)
     switch key.Key
         case 'w'
             evalin('base','Data =[0 0 0.5]');
+%             if(evalin('base','Data(end,3)')<10)
+%             evalin('base','Data = cat(1,Data,Data(end,:)+[0 0 0.1])');
+%             end
         case 's'
              evalin('base','Data = [0 0 -0.5]');
        case 'a'
@@ -12,7 +15,7 @@ function KeyPress(~,key)
        case 'c'
             evalin('base','Data = [0.5 0 0]');
         case 'z'
-             evalin('base','Data = [-0.5 0 0]');
+             evalin('base','Data = [-0.5 0 0])');
         case 'q'
             evalin('base','finish = 1');
     end
