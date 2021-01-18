@@ -5,4 +5,4 @@
 
 % Generate trajectory
 disp('Generating Trajectory ...');
-trajectory_generator([], [], Data,Speed,opt);
+trajectory_generator([],qn, Data,Speed,opt);
