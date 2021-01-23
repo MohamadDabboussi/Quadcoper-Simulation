@@ -1,4 +1,4 @@
-function [ s ] = init_state( start, yaw )
+function [ s ] = init_state( start, yaw, dimension)
 %INIT_STATE Initialize 13 x 1 state vector
 
 s     = zeros(13,1);

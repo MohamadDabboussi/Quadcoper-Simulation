@@ -1,6 +1,8 @@
 function [ts, total_time] = generate_ts(path,speed)
-
-path_len = sum(sqrt(sum((path(2:end, :) - path(1:end-1,:)).^2,2)));
+p = (path(2:end, :) - path(1:end-1,:)).^2;
+p1 = sum(p,2);
+p2 = sqrt(p1);
+path_len = sum(p2);
 total_time = path_len/speed;
 % ts = linspace(0, total_time, size(path,1));
 path_seg_len = sqrt(sqrt(sum((path(2:end, :) - path(1:end-1,:)).^2,2)));

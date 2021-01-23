@@ -40,10 +40,13 @@ if strcmp(view, 'sep')
         ylabel(labels{i})
     end
 elseif strcmp(view, '3d')
+    
     % Plot 3d
+    axis equal
     hold on
     plot3(state(1,:), state(2,:), state(3,:), line_color, 'LineWidth', line_width)
     hold off
+    
     grid on
     xlabel(labels{1});
     ylabel(labels{2});

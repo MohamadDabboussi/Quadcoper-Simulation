@@ -8,9 +8,13 @@ qd.pos = x(1:3);
 qd.vel = x(4:6);
 
 Rot = QuatToRot(x(7:10)');
-[phi, theta, yaw] = RotToRPY_ZXY(Rot);
 
-qd.euler = [phi; theta; yaw];
-qd.omega = x(11:13);
+    [phi, theta, yaw] = RotToRPY_ZXY(Rot);
+    qd.euler = [phi; theta; yaw];
+    qd.omega = x(11:13);
+
+
+
+
 
 end

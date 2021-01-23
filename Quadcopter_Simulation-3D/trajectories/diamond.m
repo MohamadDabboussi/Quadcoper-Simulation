@@ -1,4 +1,4 @@
-function [desired_state] = diamond(t, qn,Data)
+function [desired_state] = diamond(t, qn,Data,s,o,d)
 % DIAMOND trajectory generator for a diamond
 
 % =================== Your code goes here ===================
@@ -41,10 +41,10 @@ yawdot = 0.1;
 
 % =================== Your code ends here ===================
 
-desired_state.pos =[1;0;0];
-desired_state.vel =[0.1;0;0];
-desired_state.acc =[0;0;0];
-desired_state.yaw =0;
+desired_state.pos = pos(:);
+desired_state.vel = vel(:);
+desired_state.acc = acc(:);
+desired_state.yaw = yaw;
 desired_state.yawdot = yawdot;
 
 end

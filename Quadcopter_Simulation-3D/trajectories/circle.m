@@ -1,4 +1,4 @@
-function [desired_state] = circle(t, qn,Data)
+function [desired_state] = circle(t, qn,Data,s,o,d)
 % CIRCLE trajectory generator for a circle
 
 % =================== Your code goes here ===================
